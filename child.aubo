@@ -1,0 +1,37 @@
+--child thread
+
+function string.split(str, delimiter)
+    if str==nil or str=='' or delimiter==nil then
+        return nil
+    end
+    local result = {}
+    for match in (str..delimiter):gmatch("(.-)"..delimiter) do
+         table.insert(result, match)
+    end
+    return result
+end
+--connect to TCP server
+port = 5001
+ip = "192.168.1.167"
+print(ip)
+tcp.client.connect (ip,port)
+sleep(1)
+
+--read data
+recv=""
+while(true) do
+    sleep(1)
+    tcp.client.send_str_data(ip,port,"OK")
+    recv=tcp.client.recv_str_data(ip,port)
+    local size = string.len(recv)
+    print(size)
+    print(recv)
+    
+    if (recv~="") then
+        table1 = string.split(recv, ",")
+    if (table1[1]=="run") then
+        set_global_variable("V_I_offset", tonumber(table1[2]))
+        set_global_variable("V_B_run", true)
+        end
+    end
+end

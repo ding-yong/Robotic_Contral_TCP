@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MainProgram>
+    <Condition ConditionType="Project_Program" ConditionAlias="Project_Program" ConditionUuid="e73c541d87fd48b4864b95c0969fa0c7">
+        <Attribute>
+            <md5OfProjectContinueFile></md5OfProjectContinueFile>
+            <md5OfProjectPauseFile></md5OfProjectPauseFile>
+            <md5OfProjectStopFile></md5OfProjectStopFile>
+            <projectContinueFile></projectContinueFile>
+            <projectPauseFile></projectPauseFile>
+            <projectStopFile></projectStopFile>
+            <selectProjectContinue>false</selectProjectContinue>
+            <selectProjectPause>false</selectProjectPause>
+            <selectProjectStop>false</selectProjectStop>
+        </Attribute>
+        <Condition ConditionType="Script" ConditionAlias="move_control" ConditionUuid="7f49b525b10b469984537cbc15036c6f">
+            <Attribute>
+                <ScriptConditionMode>BlockScript</ScriptConditionMode>
+                <MD5>ee7eb30dbcf9e281462e53088b5e7bc1</MD5>
+                <ScriptFileName>move_control</ScriptFileName>
+            </Attribute>
+        </Condition>
+    </Condition>
+</MainProgram>

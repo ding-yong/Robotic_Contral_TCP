@@ -1,0 +1,48 @@
+--Thread Program
+
+--block script function definition
+  function blockScriptFunc_TCP_client()
+    --child thread
+    
+    function string.split(str, delimiter)
+        if str==nil or str=='' or delimiter==nil then
+            return nil
+        end
+        local result = {}
+        for match in (str..delimiter):gmatch("(.-)"..delimiter) do
+             table.insert(result, match)
+        end
+        return result
+    end
+    --connect to TCP server
+    port = 5001
+    ip = "192.168.1.167"
+    print(ip)
+    tcp.client.connect (ip,port)
+    sleep(1)
+    
+    --read data
+    recv=""
+    while(true) do
+        sleep(0.5)
+        tcp.client.send_str_data(ip,port,"OK")
+        recv=tcp.client.recv_str_data(ip,port)
+        local size = string.len(recv)
+        print(size)
+        print(recv)
+        if (recv~="") then
+            if (size<30) then
+                data = string.split(recv, ",")
+                set_global_variable("V_D_posX", tonumber(data[1]))
+                set_global_variable("V_D_posY", tonumber(data[2]))
+                set_global_variable("V_D_posZ", tonumber(data[3]))
+            end
+        end
+    end
+  end  --function blockScriptFunc_TCP_client()
+
+--(Logic tree item : Thread) Thread
+  --(Logic tree item : Script) TCP_client
+  set_current_logic_tree_item("359207b3e2e443669103a4a0e52e43f2")
+  blockScriptFunc_TCP_client()
+  set_step_breakpoint()

@@ -1,0 +1,15 @@
+init_global_move_profile()
+set_joint_maxvelc({8.298089,8.298089,8.298089,8.555088,8.555088,8.555088})
+set_joint_maxacc({8.654390,8.654390,8.654390,10.368128,10.368128,10.368128})
+--move_joint({-0.000003, -1.127267, -1.321122, 0.376934, -1.570796, -0.000008}, false)
+
+while (true) do
+    sleep(1)
+    x=get_global_variable("V_D_posX")
+    y=get_global_variable("V_D_posY")
+    z=get_global_variable("V_D_posZ")
+    print("joint_move!")
+    move_joint({z*2, -y, y*2, -y,x, 0}, false)
+    --move_joint({0.1, 0.1,0.1, 0.1,0.1, 0}, false)
+    --move_joint(get_target_pose({x, y, z}, true), true)
+end

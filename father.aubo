@@ -1,0 +1,53 @@
+--father thread
+init_global_variables("V_B_run,V_I_offset")
+--set tool parms
+set_tool_kinematics_param({0.100000, 0.200000, 0.300000}, {1.000000,
+0.000000, 0.000000, 0.000000})
+set_tool_dynamics_param(0, {0, 0, 0}, {0, 0, 0, 0, 0, 0})
+--move to readypoint
+init_global_move_profile()
+set_joint_maxvelc({1.298089,1.298089,1.298089,1.555088,1.555088,1.555088})
+set_joint_maxacc({8.654390,8.654390,8.654390,10.368128,10.368128,10.368128})
+move_joint(get_target_pose({-0.400320, -0.209060, 0.547595},
+rpy2quaternion({d2r(-179.999588), d2r(0.000243), d2r(-89.998825)}), false,
+{0.0, 0.0, 0.0}, {1.0, 0.0, 0.0, 0.0}), true)
+while (true) do
+    sleep(0.001)
+    while (not (get_global_variable("V_B_run"))) do
+        sleep(0.01)
+    end
+    local loop_times_flag_0 = 0
+    while (loop_times_flag_0 < 1) do
+        loop_times_flag_0 = loop_times_flag_0 + 1
+        sleep(0.001)
+        --movel to ready point
+        init_global_move_profile()
+        set_end_maxvelc(1.000000)
+        set_end_maxacc(1.000000)
+        set_relative_offset({get_global_variable("V_I_offset") * 0.05, 0, 0},
+CoordCalibrateMethod.zOzy, {-0.000003, -0.127267, -1.321122, 0.376934, -
+1.570796, -0.000008}, {-0.244530, -0.169460, -1.356026, 0.384230, -
+1.570794, -0.244535}, {-0.196001, 0.070752, -1.129614, 0.370431, -
+1.570795, -0.196006}, {0.100000, 0.200000, 0.300000})
+        move_line({0.208890, -0.044775, -1.246891, 0.368688, -1.570800,
+0.208869}, true)
+        --move arc
+        init_global_move_profile()
+        set_end_maxvelc(1.000000)
+        set_end_maxacc(1.000000)
+        set_relative_offset({get_global_variable("V_I_offset") * 0.05, 0, 0},
+CoordCalibrateMethod.zOzy, {-0.000003, -0.127267, -1.321122, 0.376934, -
+1.570796, -0.000008}, {-0.244530, -0.169460, -1.356026, 0.384230, -
+1.570794, -0.244535}, {-0.196001, 0.070752, -1.129614, 0.370431, -
+1.570795, -0.196006}, {0.100000, 0.200000, 0.300000})
+        add_waypoint({0.208890, -0.044775, -1.246891, 0.368688, -1.570800,
+0.208869})
+        add_waypoint({-0.237646, -0.169014, -1.355669, 0.384145, -1.570793,
+-0.237655})
+        add_waypoint({-0.000009, 0.087939, -1.110852, 0.372015, -1.570793, -
+0.000007})
+        set_circular_loop_times(0)
+        move_track(MoveTrackType.ARC_CIR, true)
+    end
+    set_global_variable("V_B_run", false)
+end

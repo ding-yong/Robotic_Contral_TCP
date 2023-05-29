@@ -1,0 +1,31 @@
+function string.split(str, delimiter)
+    if str==nil or str=='' or delimiter==nil then
+        return nil
+    end
+    local result = {}
+    for match in (str..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match)
+    end
+    return result
+end
+port = 7777
+ip = "192.168.1.113"
+print(ip)
+tcp.server.listen(port)
+print("1")
+set_global_variable("V_D_posX", 0)
+set_global_variable("V_D_posY", 0)
+set_global_variable("V_D_posZ", 0)
+recv = ""
+while(recv ~= "quit") do
+    print("2")
+    sleep(0.02)
+    recv=tcp.server.recv_str_data(ip)
+    print(recv)
+    if (recv~="") then
+        data = string.split(recv, ",")
+        set_global_variable("V_D_posX", tonumber(data[1]))
+        set_global_variable("V_D_posY", tonumber(data[2]))
+        set_global_variable("V_D_posZ", tonumber(data[3]))
+    end
+end

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ThreadProgram>
+    <Condition ConditionType="Thread" ConditionAlias="Thread" ConditionUuid="a353035299814331aacb978508195fab">
+        <Attribute>
+            <ThreadName>Thread</ThreadName>
+        </Attribute>
+        <Condition ConditionType="Script" ConditionAlias="TCP_client" ConditionUuid="359207b3e2e443669103a4a0e52e43f2">
+            <Attribute>
+                <ScriptConditionMode>BlockScript</ScriptConditionMode>
+                <MD5>72b96fc7b17c6b3578695f809086b701</MD5>
+                <ScriptFileName>TCP_client</ScriptFileName>
+            </Attribute>
+        </Condition>
+    </Condition>
+</ThreadProgram>
